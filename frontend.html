@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website</title>
+    <style>
+        #banner {
+            height: 150px;
+            background: url('https://github.com/cwen078/Web-Front-End/blob/main/Chungram.png?raw=true') no-repeat center;
+        }
+        .user-profile {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+</head>
+<body>
+    <div id="banner"></div>
+    <div id="user1" class="user-profile"></div>
+    <div id="user2" class="user-profile"></div>
+
+     <!-- Embed your Profile app web app -->
+     <iframe id="app-frame" src="https://x.thunkable.com/projects/65cbb0f53437b0dc98466ea7/387cc24a-befe-4689-af6e-6e0bfc1e62c5/designer"></iframe>
+
+    <script>
+        // Your Firebase configuration here
+        var firebaseConfig = {
+            apiKey: "AIzaSyDAgub90gxlM6UaOWKdDYiKGbCre8QWjuM",
+            authDomain: "assigment-3-185d6.firebaseapp.com",
+            databaseURL: "https://assigment-3-185d6-default-rtdb.firebaseio.com",
+            projectId: "assigment-3-185d6",
+            storageBucket: "assigment-3-185d6.appspot.com",
+            messagingSenderId: "1092946183239",
+            appId: "1:1092946183239:web:eeccf02e9bc9961541dd62"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Fetch user profiles
+        var db = firebase.database();
+        db.ref('/users/user1').once('value').then(function(snapshot) {
+            document.getElementById('user1').innerText = JSON.stringify(snapshot.val(), null, 2);
+        });
+        db.ref('/users/user2').once('value').then(function(snapshot) {
+            document.getElementById('user2').innerText = JSON.stringify(snapshot.val(), null, 2);
+        });
+    </script>
+</body>
+</html>
